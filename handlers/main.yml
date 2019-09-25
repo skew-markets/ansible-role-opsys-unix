@@ -1,0 +1,10 @@
+---
+- name: 'handler_update_timezone'
+  shell: 'timedatectl set-timezone $(cat /etc/timezone)'
+  become: true
+  when:
+  - ct_family == 'debian'
+  tags:
+  - ct-opsys-unix
+  - skip_ansible_lint
+...

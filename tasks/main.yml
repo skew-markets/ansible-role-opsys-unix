@@ -1,0 +1,47 @@
+---
+- name: 'create /usr/local structure'
+  file:
+    path: /usr/local/{{item}}
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+  loop: ['', 'bin', 'etc', 'etc/bash.d', 'lib']
+  become: true
+  tags:
+  - ct-unix
+  - ct-unix-dir
+
+- name: 'update /etc/hostname'
+  template:
+    src: etc-hostname.j2
+    dest: /etc/hostname
+    owner: root
+    mode: 0444
+  when: ct_container is not defined
+  become: true
+  tags:
+  - ct-unix
+
+- name: 'set hostname'
+  hostname:
+    name: '{{inventory_hostname}}'
+  when: ct_container is not defined
+  become: true
+  tags:
+  - ct-unix
+
+- name: 'set the timezone'
+  template:
+    src: timezone.j2
+    dest: /etc/timezone
+    owner: root
+    group: root
+    mode: 0444
+    backup: true
+  when: ct_timezone is defined
+  notify: handler_update_timezone
+  become: true
+  tags:
+  - ct-unix
+...
