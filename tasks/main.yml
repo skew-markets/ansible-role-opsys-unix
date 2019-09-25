@@ -17,7 +17,8 @@
     src: etc-hostname.j2
     dest: /etc/hostname
     owner: root
-    mode: 0444
+    group: root
+    mode: '0644'
   when: ct_container is not defined
   become: true
   tags:
@@ -37,7 +38,7 @@
     dest: /etc/timezone
     owner: root
     group: root
-    mode: 0444
+    mode: '0644'
     backup: true
   when: ct_timezone is defined
   notify: handler_update_timezone
