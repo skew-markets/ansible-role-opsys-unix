@@ -45,4 +45,15 @@
   become: true
   tags:
   - ct-unix
+
+- name: 'copy over core bash include file'
+  copy:
+    src: core.sh
+    dest: /usr/local/etc/bash.d/core.sh
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+  tags:
+  - ct-unix
 ...
