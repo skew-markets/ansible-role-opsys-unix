@@ -1,6 +1,6 @@
 ---
 dependencies:
-- src: git+https://github.com/cabtech/ansible-role-util-facts.git
+- src: git+https://github.com/skew-markets/ansible-role-util-facts.git
   tags: always
-  version: '1.0.1'
+  version: '1.0.0'
 ...
